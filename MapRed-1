@@ -1,0 +1,21 @@
+#Mapper1
+import sys
+for line in sys.stdin:
+    for word in line.strip().split():
+        print (word)
+        
+
+##Reducer1
+
+import sys
+u=0
+article_id=0
+idvalues={}
+for line in f:
+    for word in line.split():
+        idvalues[u]=word
+        u=u+1
+        if u==4000:
+            print("Article id ",article_id,"word id",idvalues)
+            article_id=article_id+1
+            
