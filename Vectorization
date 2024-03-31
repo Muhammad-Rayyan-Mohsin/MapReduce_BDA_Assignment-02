@@ -1,0 +1,26 @@
+
+## This code snippet implements a basic text mining process for a single input document. It tokenizes the document, computes its TF-IDF vector representation, and then normalizes the vector.
+
+import numpy as np
+
+document = input("Enter query: ")
+
+tokenized_document = document.lower().split()
+
+vocabulary = set(tokenized_document)
+word_to_index = {word: idx for idx, word in enumerate(vocabulary)}
+
+tf_matrix = np.zeros((1, len(vocabulary)))
+for word in tokenized_document:
+    word_idx = word_to_index[word]
+    tf_matrix[0, word_idx] += 1
+
+idf_vector = np.log(1 / (1 + np.sum(tf_matrix > 0, axis=0)))
+
+tfidf_matrix = tf_matrix * idf_vector
+
+norms = np.linalg.norm(tfidf_matrix, axis=1, keepdims=True)
+tfidf_matrix_normalized = tfidf_matrix / norms
+
+print("Normalized vector is: ")
+print(tfidf_matrix_normalized)
