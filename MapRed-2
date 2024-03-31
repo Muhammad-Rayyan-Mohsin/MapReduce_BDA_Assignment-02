@@ -1,0 +1,28 @@
+##Mapper2
+
+import sys 
+id=0
+for x in sys.stdin:
+ word=x.strip().split()
+ print(id,word)
+ id=id+1
+
+##Reducer2
+
+import sys
+vocabulary=" "
+for x in sys.stdin:
+    x=x.strip().split()
+    vocabulary=vocabulary+" "+x
+    uniquewords=[]
+for x in vocabulary.split():
+    if x not in uniquewords:
+        uniquewords.append(x)
+u=0
+wordcounts = {}
+for word in uniquewords:
+        wordcounts[u] = word
+        u=u+1
+for x in range(len(wordcounts)):
+    idf=vocabulary.count(wordcounts[x])
+    print(wordcounts[x],idf)
