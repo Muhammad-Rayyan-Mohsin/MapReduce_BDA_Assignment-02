@@ -73,3 +73,38 @@ for x in range(len(wordcounts)):
  idf=vocabulary.count(wordcounts[x])
  weights2[x]=tf/idf
 print(weights2)
+
+##This code snippet implements a basic text mining process for a single input document. It tokenizes the document, computes its TF-IDF vector representation, and then normalizes the vector.
+
+import numpy as np
+
+# Accepting a single document as input
+document = input("Enter query: ")
+
+# Tokenizing the document
+tokenized_document = document.lower().split()
+
+# Building a vocabulary from the document
+vocabulary = set(tokenized_document)
+word_to_index = {word: idx for idx, word in enumerate(vocabulary)}
+
+# Computing term frequency of the document
+tf_matrix = np.zeros((1, len(vocabulary)))
+for word in tokenized_document:
+    word_idx = word_to_index[word]
+    tf_matrix[0, word_idx] += 1
+
+# Computing IDF
+idf_vector = np.log(1 / (1 + np.sum(tf_matrix > 0, axis=0)))
+
+# Computing TF-IDF matrix
+tfidf_matrix = tf_matrix * idf_vector
+
+# Normalizing matrix
+norms = np.linalg.norm(tfidf_matrix, axis=1, keepdims=True)
+tfidf_matrix_normalized = tfidf_matrix / norms
+
+# Printing vector
+print("Normalized vector is: ")
+print(tfidf_matrix_normalized)
+
