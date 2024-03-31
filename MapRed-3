@@ -1,0 +1,24 @@
+##Mapper3
+
+import sys
+for x in sys.stdin:
+  x=x.strip().split()
+  print(x)
+
+##Reducer3
+
+import sys 
+wordcounts={}
+weights={}
+u=0
+idf=[]
+for x in sys.stdin:
+  x=x.strip().split
+  idf.append(x)
+  wordcounts[u]=x.count(wordcounts[x])
+  u=u+1
+for x in range(len(wordcounts)):
+ tf=idf.count(wordcounts[x])
+ idf2=idf[x]
+ weights[x]=tf/idf2
+print(weights1)
