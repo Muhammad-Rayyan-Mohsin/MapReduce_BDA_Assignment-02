@@ -1,0 +1,9 @@
+# Calculating relevancy
+relevancyscore=0
+def findrelevancy(vector1, vector2):
+    dotproduct = np.dot(vector1, vector2.T)
+    relevancyscore=relevancyscore+dotproduct
+    return relevancyscore
+relevancy = findrelevancy(tfidf_matrix_normalized1, tfidf_matrix_normalized2)
+print("Relevancy score with document is: ", relevancy)
+if relevancy score>1 print("Document is relevant")
